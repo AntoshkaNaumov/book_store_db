@@ -16,12 +16,15 @@ class Shop(Base):
     id = sq.Column(sq.Integer, primary_key=True)
     name = sq.Column(sq.Text, unique=True)
 
+    def __str__(self):
+        return f'{self.id}: {self.name}'
+
 class Book(Base):
     __tablename__ = "books"
 
     id = sq.Column(sq.Integer, primary_key=True)
     title = sq.Column(sq.Text, nullable=False)
-    id_publisher = sq.Column(sq.Integer, sq.ForeignKey("bublishers.id"), nullable=False)
+    id_publisher = sq.Column(sq.Integer, sq.ForeignKey("publishers.id"), nullable=False)
 
     publisher = relationship(Publisher, backref="books")
 
